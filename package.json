@@ -39,10 +39,10 @@
     "mocha": "^3.3.0",
     "semantic-release": "^6.3.2"
   },
-  "czConfig": {
-    "path": "node_modules/cz-conventional-changelog"
-  },
   "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    },  
     "ghooks": {
       "pre-commit": "npm run test"
     }
