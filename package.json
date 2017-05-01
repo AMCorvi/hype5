@@ -1,14 +1,16 @@
 {
   "name": "hype5",
-  "version": "0.2.0",
+  "version": "0.0.0-development",
   "description": "Data resource for newly buzzing music using 'Hype Machine' as resource... ",
   "main": "./dist/hype5.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-register ./src/index.test.js -w"
+    "commit": "git-cz",
+    "test": "mocha --compilers js:babel-register ./src/index.test.js -w",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AMCorvi/hype5.git"
+    "url": "https://github.com/AMCorvi/hype5.git"
   },
   "keywords": [
     "music"
@@ -26,10 +28,16 @@
     "babel-preset-latest": "^6.24.1",
     "babel-register": "^6.24.1",
     "chai": "^3.5.0",
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.0.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.6.1",
     "gulp-sourcemaps": "^2.6.0",
-    "mocha": "^3.3.0"
+    "mocha": "^3.3.0",
+    "semantic-release": "^6.3.2"
+  },
+  "czConfig": {
+      "path": "node_modules/cz-conventional-changelog"
   }
 }
