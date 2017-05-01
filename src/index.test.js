@@ -4,7 +4,6 @@ var hype5 = require('../src/index.js');
 
 describe("hype5", ()=>{
     describe(" 'top' method ", ()=>{
-
         it("'top' method should return promise",()=>{
 
             function isAPromise(res){
