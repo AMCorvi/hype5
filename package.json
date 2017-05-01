@@ -1,6 +1,6 @@
 {
   "name": "hype5",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Data resource for newly buzzing music using 'Hype Machine' as resource... ",
   "main": "./dist/hype5.js",
   "scripts": {
