@@ -1,10 +1,10 @@
 {
   "name": "hype5",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Data resource for newly buzzing music using 'Hype Machine' as resource... ",
   "main": "./dist/hype5.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --compilers js:babel-register ./src/index.test.js -w"
   },
   "repository": {
     "type": "git",
@@ -24,9 +24,12 @@
   },
   "devDependencies": {
     "babel-preset-latest": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "chai": "^3.5.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.6.1",
-    "gulp-sourcemaps": "^2.6.0"
+    "gulp-sourcemaps": "^2.6.0",
+    "mocha": "^3.3.0"
   }
 }

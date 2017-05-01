@@ -12,6 +12,6 @@ gulp.task("default", function () {
     .pipe(gulp.dest("dist"));
 });
 
-gulp.task("watch" function(){
+gulp.task("watch", function(){
     gulp.task('./src/index.js', ["default"]) 
 })
