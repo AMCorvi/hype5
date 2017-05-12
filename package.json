@@ -5,7 +5,7 @@
   "main": "./dist/hype5.js",
   "scripts": {
     "commit": "git-cz",
-    "test": "mocha --compilers js:babel-register ./src/index.test.js ",
+    "test": "istanbul cover -x *.test.js _mocha --  --compilers js:babel-register -R spec ./src/index.test.js ",
     "test:watch": "mocha --compilers js:babel-register ./src/index.test.js -w",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
@@ -36,13 +36,14 @@
     "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.6.1",
     "gulp-sourcemaps": "^2.6.0",
+    "istanbul": "^0.4.5",
     "mocha": "^3.3.0",
     "semantic-release": "^6.3.2"
   },
   "config": {
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
-    },  
+    },
     "ghooks": {
       "pre-commit": "npm run test"
     }

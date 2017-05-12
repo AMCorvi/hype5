@@ -67,49 +67,4 @@ var remixes = exports.remixes = function remixes(limit) {
 
     return x;
 };
-'use strict';
-
-var expect = require('chai').expect;
-var hype5 = require('../src/index.js');
-
-describe("hype5", function () {
-    describe(" 'top' method ", function () {
-
-        it("'top' method should return promise", function () {
-
-            function isAPromise(res) {
-                return res instanceof Promise;
-            };
-
-            expect(hype5.top()).to.satisfy(isAPromise);
-        });
-
-        it(" Promise should contain object", function () {
-
-            hype5.top().then(function (data) {
-                expect(data).to.be.an('object');
-            }).catch(function (err) {
-                return console.log(err);
-            });
-        });
-
-        it(" Promise data should contain certain properties", function () {
-            hype5.top().then(function (data) {
-                expect(data["0"]).to.contain.all.keys(["artist", "title", "posturl", "thumb_url"]);
-            }).catch(function (err) {
-                return console.log(err);
-            });
-        });
-
-        it("should set response limit given parameter", function () {
-
-            hype5.top(5).then(function (data) {
-                expect(data, "should not contain index(or key) of or past 5").to.not.contain.any.keys('5');
-                expect(data, "should contain indices (or keys) of 0,1,2,3,4").to.contain.any.keys('0', '1', '2', '3', '4');
-            }).catch(function (err) {
-                return console.log(err);
-            });
-        });
-    });
-});
 //# sourceMappingURL=hype5.js.map

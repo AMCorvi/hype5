@@ -4,7 +4,7 @@ var babel = require("gulp-babel");
 var concat = require("gulp-concat");
 
 gulp.task("default", function () {
-  return gulp.src("src/*.js")
+  return gulp.src("src/index.js")
     .pipe(sourcemaps.init())
     .pipe(babel())
     .pipe(concat("hype5.js"))
