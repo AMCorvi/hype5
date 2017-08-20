@@ -4,14 +4,13 @@ var babel = require("gulp-babel");
 var concat = require("gulp-concat");
 
 gulp.task("default", function () {
-  return gulp.src("src/index.js")
+  return gulp.src([ "src/index.js", "src/crawler.js" ])
     .pipe(sourcemaps.init())
     .pipe(babel())
-    .pipe(concat("hype5.js"))
     .pipe(sourcemaps.write("."))
     .pipe(gulp.dest("dist"));
 });
 
 gulp.task("watch", function(){
-    gulp.task('./src/index.js', ["default"]) 
+    gulp.watch('./src/index.js', ["default"])
 })

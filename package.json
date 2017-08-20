@@ -23,10 +23,12 @@
   },
   "homepage": "https://github.com/AMCorvi/hype5#readme",
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "node-fetch": "^1.6.3"
   },
   "devDependencies": {
-    "babel-preset-latest": "^6.24.1",
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.6.0",
     "babel-register": "^6.24.1",
     "chai": "^3.5.0",
     "commitizen": "^2.9.6",
