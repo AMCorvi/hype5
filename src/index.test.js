@@ -1,65 +1,24 @@
-var expect = require("chai").expect;
-var hype5 = require("../src/index.js");
+const hype5 = require("./index.js");
 
 describe("hype5", () => {
-	describe.skip(" 'top' method ", () => {
-		it("'top' method should return promise", () => {
-			function isAPromise(res) {
-				return res instanceof Promise;
-			}
-
-			expect(hype5.top()).to.satisfy(isAPromise);
+	describe("remix method", () => {
+		test.skip("That method checks for vali type parameter", done => {
+			hype5.remixes("cool").catch(err => {
+				expect(err).toBeInstanceOf(Error);
+				done();
+			});
 		});
 
-		it(" Promise should contain object", () => {
-			hype5
-				.top()
-				.then(data => {
-					expect(data).to.be.an("object");
-				})
-				.catch(err => console.log(err));
-		});
+    test("Method return 'Promise'")
 
-		it(" Promise data should contain certain properties", () => {
-			hype5
-				.top()
-				.then(data => {
-					expect(data["0"]).to.contain.all.keys([
-						"artist",
-						"title",
-						"posturl",
-						"thumb_url",
-					]);
-				})
-				.catch(err => console.log(err));
-		});
+		test("That method calls crawlFunc function", async () => {
+			let crawlFuncSim = jest.fn((a, b) => `${a} ${b}`);
+			let rem = hype5.remixes;
 
-		it("should set response limit given parameter", () => {
-			hype5
-				.top(5)
-				.then(data => {
-					expect(
-						data,
-						"should not contain index(or key) of or past 5",
-					).to.not.contain.any.keys("5");
-					expect(
-						data,
-						"should contain indices (or keys) of 0,1,2,3,4",
-					).to.contain.any.keys("0", "1", "2", "3", "4");
-				})
-				.catch(err => console.log(err));
+
+			rem = await rem("popular", crawlFuncSim);
+      expect(crawlFuncSim.mock.calls[0][1]).toBe("remix");
+      expect(crawlFuncSim.mock.calls[0][0]).toBe("popular");
 		});
 	});
-
-	describe(" 'remixes' method ", () => {
-		it(" checks for valid type parameter ", () => {
-			let cool;
-			hype5.remixes("cool").then(a => null).catch(err => (cool = err));
-			console.log(typeof cool);
-			console.log(typeof cool);
-			console.log(typeof cool);
-			expect(cool).to.include("Invalid Argument");
-		});
-	});
-
 });

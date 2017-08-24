@@ -5,8 +5,9 @@
   "main": "./dist/hype5.js",
   "scripts": {
     "commit": "git-cz",
-    "test": "istanbul cover -x *.test.js _mocha --  --compilers js:babel-register -R spec ./src/index.test.js ",
-    "test:watch": "mocha --compilers js:babel-register ./src/index.test.js -w",
+    "format": "prettier-eslint \"./src/*.js\"",
+    "test": "jest --coverage",
+    "test:watch": "jest --watch",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
@@ -28,18 +29,23 @@
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
+    "babel-jest": "^20.0.3",
     "babel-preset-env": "^1.6.0",
     "babel-register": "^6.24.1",
-    "chai": "^3.5.0",
+    "chai-as-promised": "^7.1.1",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.0.0",
+    "eslint": "4.5.0",
+    "eslint-config-airbnb-base": "11.3.1",
+    "eslint-plugin-import": "2.7.0",
     "ghooks": "^2.0.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.6.1",
     "gulp-sourcemaps": "^2.6.0",
-    "istanbul": "^0.4.5",
-    "mocha": "^3.3.0",
+    "jest": "^20.0.4",
+    "prettier-eslint-cli": "^4.2.1",
+    "regenerator-runtime": "^0.11.0",
     "semantic-release": "^6.3.2"
   },
   "config": {

@@ -126,51 +126,67 @@ var remix = exports.remix = function remix(limit) {
 
 var remixes = exports.remixes = function () {
 	var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(type) {
-		var options, _result, getData;
-
+		var options, output, getData;
 		return regeneratorRuntime.wrap(function _callee2$(_context2) {
 			while (1) {
 				switch (_context2.prev = _context2.next) {
 					case 0:
 						options = ["popular", "latest"];
+
+						// Compare filter parameter with list of possible valid filters
+
 						_context2.prev = 1;
 
 						if (options.find(function (val) {
 							return val === type;
 						})) {
-							_context2.next = 10;
+							_context2.next = 4;
 							break;
 						}
 
-						throw new Error("\n \n Invalid Argument: \n \t Call of function 'remixes' made with invalid arg " + type + ".\n \t Insert valid filter argument. \n \t e.g. " + options + " \n\n", "index.js", 89);
+						throw new SyntaxError(" \n\n \t Call of function 'remixes' made with invalid arg " + type + ".\n\t Insert valid filter argument. \n\t e.g. " + options + "\n", "index.js", 89);
 
-					case 7:
+					case 4:
+						_context2.next = 9;
+						break;
+
+					case 6:
+						_context2.prev = 6;
+						_context2.t0 = _context2["catch"](1);
+						throw _context2.t0;
+
+					case 9:
+						output = void 0;
+						_context2.next = 12;
+						return function () {
+							return new Promise(function (resolve, reject) {
+								try {
+									var x = crawlData(type, "remix");
+									resolve(x);
+								} catch (err) {
+									reject(err);
+								}
+							});
+						};
+
+					case 12:
 						getData = _context2.sent;
-						_context2.next = 10;
+						_context2.next = 15;
 						return getData().then(function (data) {
-							_result = data;
+							output = data;
 						}).catch(function (err) {
 							throw err;
 						});
 
-					case 10:
-						_context2.next = 15;
-						break;
-
-					case 12:
-						_context2.prev = 12;
-						_context2.t0 = _context2["catch"](1);
-						return _context2.abrupt("return", _context2.t0.message);
-
 					case 15:
-						return _context2.abrupt("return", result);
+						return _context2.abrupt("return", output);
 
 					case 16:
 					case "end":
 						return _context2.stop();
 				}
 			}
-		}, _callee2, this, [[1, 12]]);
+		}, _callee2, this, [[1, 6]]);
 	}));
 
 	return function remixes(_x3) {
