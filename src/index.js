@@ -1,7 +1,7 @@
 import "babel-polyfill";
 import { exec } from "child_process";
 
-async function runCasper(type, filter) {
+let runCasper = async function(type, filter) {
 	// Variable to assign return data
 	let returnValue;
 
@@ -18,18 +18,24 @@ async function runCasper(type, filter) {
 			}
 		}
 
-		exec(
-			`casperjs --verbose ./dist/crawler.js --hypeType=${type} --hypeFilter=${filter}`,
-			puts
-		);
+		if (type && filter) {
+			exec(
+				`casperjs --verbose ./dist/crawler.js --hypeType=${type} --hypeFilter=${filter}`,
+				puts
+			);
+		} else if (type) {
+			exec(`casperjs --verbose ./dist/crawler.js --hypeType=${type} `, puts);
+		} else if (!type) {
+            console.log("no filter no type")
+			exec("casperjs --verbose ./dist/crawler.js ", puts);
+		}
 	});
 
 	// pause for data and assign to returnValue variable
 	await data.then(trackData => (returnValue = trackData));
 
 	return returnValue;
-}
-
+};
 
 export const top = async (type, crawlFunc = runCasper) => {
 	// list of options that are actually valid
@@ -39,12 +45,14 @@ export const top = async (type, crawlFunc = runCasper) => {
 
 	// Compare filter parameter with list of possible valid filters
 	try {
-		if (!options.find(val => val === type)) {
-			throw new SyntaxError(
-				` \n\n \t Call of function 'remixes' made with invalid arg ${type}.\n\t Insert valid filter argument. \n\t e.g. ${options}\n`,
-				"index.js",
-				89
-			);
+		if (type) {
+			if (!options.find(val => val === type)) {
+				throw new SyntaxError(
+					` \n\n \t Call of function 'remixes' made with invalid arg ${type}.\n\t Insert valid filter argument. \n\t e.g. ${options}\n`,
+					"index.js",
+					89
+				);
+			}
 		}
 	} catch (e) {
 		throw e;
@@ -53,7 +61,7 @@ export const top = async (type, crawlFunc = runCasper) => {
 	const getData = () => {
 		return new Promise((resolve, reject) => {
 			try {
-				const x = crawlFunc(type);
+				const x = type ? crawlFunc(type) : crawlFunc();
 				resolve(x);
 			} catch (err) {
 				reject(err);

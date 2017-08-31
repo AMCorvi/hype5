@@ -3,22 +3,16 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.remixes = exports.remix = exports.latest = exports.top = undefined;
+exports.remixes = exports.noremixes = exports.top = undefined;
 
 require("babel-polyfill");
 
-var _nodeFetch = require("node-fetch");
-
-var _nodeFetch2 = _interopRequireDefault(_nodeFetch);
-
 var _child_process = require("child_process");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-var crawlData = function () {
-	var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(type, filter) {
+var runCasper = function () {
+	var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(type, filter) {
 		var returnValue, data;
 		return regeneratorRuntime.wrap(function _callee$(_context) {
 			while (1) {
@@ -41,14 +35,21 @@ var crawlData = function () {
 								}
 							}
 
-							(0, _child_process.exec)("casperjs --verbose ./dist/crawler.js --hypeType=" + type + " --hypeFilter=" + filter, puts);
+							if (type && filter) {
+								(0, _child_process.exec)("casperjs --verbose ./dist/crawler.js --hypeType=" + type + " --hypeFilter=" + filter, puts);
+							} else if (type) {
+								(0, _child_process.exec)("casperjs --verbose ./dist/crawler.js --hypeType=" + type + " ", puts);
+							} else if (!type) {
+								console.log("no filter no type");
+								(0, _child_process.exec)("casperjs --verbose ./dist/crawler.js ", puts);
+							}
 						});
 
 						// pause for data and assign to returnValue variable
 
 						_context.next = 4;
-						return data.then(function (data) {
-							return returnValue = data;
+						return data.then(function (trackData) {
+							return returnValue = trackData;
 						});
 
 					case 4:
@@ -62,106 +63,57 @@ var crawlData = function () {
 		}, _callee, this);
 	}));
 
-	return function crawlData(_x, _x2) {
+	return function runCasper(_x, _x2) {
 		return _ref.apply(this, arguments);
 	};
 }();
 
-var top = exports.top = function top(limit) {
-	var x = (0, _nodeFetch2.default)("http://hypem.com/playlist/popular/3day/json/1/data.js").then(function (res) {
-		return res.json();
-	}).then(function (json) {
-		if (limit && limit < 20) {
-			var res = {};
-			for (var i = 0; i <= limit - 1; i += 1) {
-				res["" + i] = json["" + i];
-			}
-			return res;
-		}
-		return json;
-	}).catch(function (error) {
-		return console.log(error);
-	});
-
-	return x;
-};
-
-var latest = exports.latest = function latest(limit) {
-	var x = (0, _nodeFetch2.default)("http://hypem.com/playlist/latest/all/json/1/data.json").then(function (res) {
-		return res.json();
-	}).then(function (json) {
-		if (limit && limit < 20) {
-			var res = {};
-			for (var i = 0; i <= limit - 1; i += 1) {
-				res["" + i] = json["" + i];
-			}
-			return res;
-		}
-		return json;
-	}).catch(function (error) {
-		return console.log(error);
-	});
-
-	return x;
-};
-
-var remix = exports.remix = function remix(limit) {
-	var x = (0, _nodeFetch2.default)("http://hypem.com/playlist/popular/remix/json/1/data.json").then(function (res) {
-		return res.json();
-	}).then(function (json) {
-		if (limit && limit < 20) {
-			var res = {};
-			for (var i = 0; i <= limit - 1; i += 1) {
-				res["" + i] = json["" + i];
-			}
-			return res;
-		}
-		return json;
-	}).catch(function (error) {
-		return console.log(error);
-	});
-
-	return x;
-};
-
-var remixes = exports.remixes = function () {
-	var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(type) {
+var top = exports.top = function () {
+	var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(type) {
+		var crawlFunc = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : runCasper;
 		var options, output, getData;
 		return regeneratorRuntime.wrap(function _callee2$(_context2) {
 			while (1) {
 				switch (_context2.prev = _context2.next) {
 					case 0:
+						// list of options that are actually valid
 						options = ["popular", "latest"];
+						// Value assigned to and return by function
+
+						output = void 0;
 
 						// Compare filter parameter with list of possible valid filters
 
-						_context2.prev = 1;
+						_context2.prev = 2;
+
+						if (!type) {
+							_context2.next = 6;
+							break;
+						}
 
 						if (options.find(function (val) {
 							return val === type;
 						})) {
-							_context2.next = 4;
+							_context2.next = 6;
 							break;
 						}
 
 						throw new SyntaxError(" \n\n \t Call of function 'remixes' made with invalid arg " + type + ".\n\t Insert valid filter argument. \n\t e.g. " + options + "\n", "index.js", 89);
 
-					case 4:
-						_context2.next = 9;
+					case 6:
+						_context2.next = 11;
 						break;
 
-					case 6:
-						_context2.prev = 6;
-						_context2.t0 = _context2["catch"](1);
+					case 8:
+						_context2.prev = 8;
+						_context2.t0 = _context2["catch"](2);
 						throw _context2.t0;
 
-					case 9:
-						output = void 0;
-						_context2.next = 12;
-						return function () {
+					case 11:
+						getData = function getData() {
 							return new Promise(function (resolve, reject) {
 								try {
-									var x = crawlData(type, "remix");
+									var x = type ? crawlFunc(type) : crawlFunc();
 									resolve(x);
 								} catch (err) {
 									reject(err);
@@ -169,28 +121,168 @@ var remixes = exports.remixes = function () {
 							});
 						};
 
-					case 12:
-						getData = _context2.sent;
-						_context2.next = 15;
+						_context2.next = 14;
 						return getData().then(function (data) {
 							output = data;
 						}).catch(function (err) {
 							throw err;
 						});
 
-					case 15:
+					case 14:
 						return _context2.abrupt("return", output);
 
-					case 16:
+					case 15:
 					case "end":
 						return _context2.stop();
 				}
 			}
-		}, _callee2, this, [[1, 6]]);
+		}, _callee2, undefined, [[2, 8]]);
 	}));
 
-	return function remixes(_x3) {
+	return function top(_x4) {
 		return _ref2.apply(this, arguments);
+	};
+}();
+
+var noremixes = exports.noremixes = function () {
+	var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(type) {
+		var crawlFunc = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : runCasper;
+		var options, output, getData;
+		return regeneratorRuntime.wrap(function _callee3$(_context3) {
+			while (1) {
+				switch (_context3.prev = _context3.next) {
+					case 0:
+						// list of options that are actually valid
+						options = ["popular", "latest"];
+						// Value assigned to and return by function
+
+						output = void 0;
+
+						// Compare filter parameter with list of possible valid filters
+
+						_context3.prev = 2;
+
+						if (options.find(function (val) {
+							return val === type;
+						})) {
+							_context3.next = 5;
+							break;
+						}
+
+						throw new SyntaxError(" \n\n \t Call of function 'remixes' made with invalid arg " + type + ".\n\t Insert valid filter argument. \n\t e.g. " + options + "\n", "index.js", 89);
+
+					case 5:
+						_context3.next = 10;
+						break;
+
+					case 7:
+						_context3.prev = 7;
+						_context3.t0 = _context3["catch"](2);
+						throw _context3.t0;
+
+					case 10:
+						getData = function getData() {
+							return new Promise(function (resolve, reject) {
+								try {
+									var x = crawlFunc(type, "noremix");
+									resolve(x);
+								} catch (err) {
+									reject(err);
+								}
+							});
+						};
+
+						_context3.next = 13;
+						return getData().then(function (data) {
+							output = data;
+						}).catch(function (err) {
+							throw err;
+						});
+
+					case 13:
+						return _context3.abrupt("return", output);
+
+					case 14:
+					case "end":
+						return _context3.stop();
+				}
+			}
+		}, _callee3, undefined, [[2, 7]]);
+	}));
+
+	return function noremixes(_x6) {
+		return _ref3.apply(this, arguments);
+	};
+}();
+
+var remixes = exports.remixes = function () {
+	var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(type) {
+		var crawlFunc = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : runCasper;
+		var options, output, getData;
+		return regeneratorRuntime.wrap(function _callee4$(_context4) {
+			while (1) {
+				switch (_context4.prev = _context4.next) {
+					case 0:
+						// list of options that are actually valid
+						options = ["popular", "latest"];
+						// Value assigned to and return by function
+
+						output = void 0;
+
+						// Compare filter parameter with list of possible valid filters
+
+						_context4.prev = 2;
+
+						if (options.find(function (val) {
+							return val === type;
+						})) {
+							_context4.next = 5;
+							break;
+						}
+
+						throw new SyntaxError(" \n\n \t Call of function 'remixes' made with invalid arg " + type + ".\n\t Insert valid filter argument. \n\t e.g. " + options + "\n", "index.js", 89);
+
+					case 5:
+						_context4.next = 10;
+						break;
+
+					case 7:
+						_context4.prev = 7;
+						_context4.t0 = _context4["catch"](2);
+						throw _context4.t0;
+
+					case 10:
+						getData = function getData() {
+							return new Promise(function (resolve, reject) {
+								try {
+									var x = crawlFunc(type, "remix");
+									resolve(x);
+								} catch (err) {
+									reject(err);
+								}
+							});
+						};
+
+						_context4.next = 13;
+						return getData().then(function (data) {
+							output = data;
+						}).catch(function (err) {
+							throw err;
+						});
+
+					case 13:
+						return _context4.abrupt("return", output);
+
+					case 14:
+					case "end":
+						return _context4.stop();
+				}
+			}
+		}, _callee4, undefined, [[2, 7]]);
+	}));
+
+	return function remixes(_x8) {
+		return _ref4.apply(this, arguments);
 	};
 }();
 //# sourceMappingURL=index.js.map

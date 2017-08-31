@@ -1,6 +1,7 @@
 const hype5 = require("./index.js");
 
 describe("hype5", () => {
+
 	describe("'top' method", () => {
 
 		test("Method is instance of Promise", () => {
@@ -15,12 +16,20 @@ describe("hype5", () => {
 			await expect(rem("latest", crawlFuncSim)).resolves.toBe("latest");
 		});
 
-		test("Method checks for valid type parameter", done => {
-			hype5.top("cool").catch(err => {
+		test("Method checks return Error for on incorrect parameter", done => {
+			hype5.top("invalid parameter option").catch(err => {
 				expect(err).toBeInstanceOf(Error);
 				done();
 			});
 		});
+
+        test("Method continues to run using default when no parameter is set", ()=>{
+            let mock = jest.fn()
+            .mockReturnValue("We're cool!");
+
+            expect( hype5.top(null, mock).catch(e=>e) ).resolves.toEqual("We're cool!")
+
+        });
 
 		test("Method calls crawlFunc function", async () => {
 			let crawlFuncSim = jest.fn((a) => a );

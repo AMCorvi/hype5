@@ -1,10 +1,30 @@
 var casper = require("casper").create();
+var utils = require("utils");
 
 var tracks = [];
-var hypeType = casper.cli.get("hypeType");
-var hypeFilter = casper.cli.get("hypeFilter");
 
+/**
+ * IIFE sets variable only hypeFilter varibale only if such option was provided
+ *
+ * @returns {object} map of options specifying search type wanted
+ */
+//
+var opt = (function() {
+	var options = {};
+	casper.cli.has("hypeType")
+		? (options.type = casper.cli.get("hypeType"))
+		: null;
+	casper.cli.has("hypeFilter")
+		? (options.filter = casper.cli.get("hypeFilter"))
+		: null;
+	return options;
+})();
 
+utils.dump(opt.filter);
+utils.dump("cool");
+utils.dump(opt.type);
+
+// TODO: Document
 function getTrackInfo(tracks) {
 	tracks;
 	var element = document.getElementsByClassName("section-track");
@@ -33,18 +53,36 @@ function getTrackInfo(tracks) {
 			descrip: desc,
 			thumbnail: color,
 			song: trackName,
-			blogName: blogName,
+			blogName: blogName
 		};
 	});
 	return tracks.concat(cool);
 }
 
+/**
+ * Scan Hype Machine
+ *
+ * @param {string} type class of track info request [latest track or most popular tracks]
+ * @param {array} filter filter for specifed class of tracks [none, remixes, noremixes]
+ * @returns {array} An array of tracks information
+ */
 function scanHype(type, filter) {
+	// set 'type' variable to popular as default if valid value is not provided
+	type = type || "popular";
 
-	var url = filter
-		? "http://hypem.com"
-		: "http://hypem.com/" + type + "/" + filter;
+	// check variable and set correct url
+	var url = !filter
+		? `http://hypem.com/${type}/${filter}`
+		: `http://hypem.com/${type}`
 
+	utils.dump(`the url is ${url}`);
+
+	utils.dump(`${filter===true}`);
+	/**
+     * Start phantomjs instance that crawls url scraping data as instructed by callback function
+     *
+     * @returns {array} An array of track info from endpoint specified
+     */
 	casper.start(url, function() {
 		this.waitForSelector(".post_info", function() {
 			var info = this.evaluate(getTrackInfo, []);
@@ -59,4 +97,10 @@ function scanHype(type, filter) {
 	casper.run();
 }
 
-scanHype(hypeType, hypeFilter);
+if (opt.filter) {
+    utils.dump("type and filter")
+	scanHype(opt.type, opt.filter);
+} else {
+    utils.dump(" type only")
+	scanHype(opt.type);
+}
