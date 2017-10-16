@@ -1,4 +1,4 @@
-const hype5 = require("./index.js");
+const hype5 = require("./hype5.js");
 
 describe("hype5", () => {
 

@@ -285,4 +285,4 @@ var remixes = exports.remixes = function () {
 		return _ref4.apply(this, arguments);
 	};
 }();
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=hype5.js.map
