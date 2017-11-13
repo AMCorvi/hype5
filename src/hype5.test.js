@@ -1,5 +1,7 @@
 const hype5 = require("./hype5.js");
 
+/* eslint-disable */
+
 describe("hype5", () => {
 
 	describe("'top' method", () => {

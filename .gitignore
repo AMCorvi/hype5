@@ -2,4 +2,6 @@ node_modules/
 nvim-python.log_py3_rplugin
 nvim-python.log_py3_script
 notes.scrap
+.tern-port
+.tern-project
 to.js
