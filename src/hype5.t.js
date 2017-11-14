@@ -33,6 +33,7 @@ describe("hype5", () => {
 
         });
 
+
 		test("Method calls crawlFunc function", async () => {
 			let crawlFuncSim = jest.fn((a) => a );
 			let rem = hype5.top;
