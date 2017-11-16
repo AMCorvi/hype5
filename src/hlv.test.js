@@ -9,12 +9,12 @@ describe("hype5", function() {
 
   test("Module contains expected methods", function() {
     const keys = Object.keys(hype5);
-    expect(keys).toContain("top");
   });
 
   describe("top module", function() {
-     test("Module contains expected methods", function () {
-      expect(2).toEqual(2);
-     });
+    test("Module contains expected methods", function() {
+      expect(hype5.top).toBeDefined();
+    });
+
   });
 });

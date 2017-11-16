@@ -2,44 +2,56 @@ require("babel-polyfill");
 const exec = require("child_process").exec;
 const path = require("path");
 
-const hype5 = (function() {
-  async function top(
-    type,
-    filter = "top",
-    dataget = getData,
-    vData = validate
+/** @module Hype5*/
+
+const Hype5 = {
+  top: methodFactory("top"),
+  remixes: methodFactory("remixes"),
+  noremixes: methodFactory("noremixes")
+};
+
+/** Factory used to produced module method variations
+ * @name methodFactory
+ * @param {string} filter the category by which you would like to filter
+ * @return {function} a function set to the desired filter as a default
+ */
+function methodFactory(filter) {
+  return async function(
+    type = "popular",
+    sig = {
+      filter: filter,
+      retrieveTrackInfo: getData,
+      vData: validate
+    }
   ) {
     // Check if "type" parameter is valid value
     // if not throw error
     if (type) {
-      const isTypeValid = vData(type, filter);
+      const isTypeValid = sig.vData(type, sig.filter);
       if (!isTypeValid) throw isTypeValid;
     } else {
       type = "popular";
     }
 
     // Run casper script	& retrieve JSON data.
-    const d = dataget(type, filter);
+    const d = sig.retrieveTrackInfo(type, sig.filter);
     let output;
     await d.then(data => (output = data)).catch(err => {
       throw err;
     });
 
     return output;
-  }
-
-  return {
-    top: top
   };
-})();
+}
 
 /** This function exec an appropriatley formatted 'casperjs' command with
-  * the appropriate flags and data (as determined in the calling function) in
-  * a child process. It then return json a json array of music data
+ * the appropriate flags and data (as determined in the calling function) in
+ * a child process. It then return json a json array of music data
  *
+ * @private
  * @param {string} type indicator of whether most "popular" or "latest" music is desired.
  * @param {string} filter the type of music you want leasted (eg. top || remixes || noremixes
- * @returns {Object} Array of objects contain blogged track info.
+ * @returns {object} Array of objects contain blogged track info.
  */
 function casperjsFunction(type, filter) {
   return new Promise(function(resolve, reject) {
@@ -50,8 +62,6 @@ function casperjsFunction(type, filter) {
         reject(err);
       }
     };
-
-    //TODO:Fix the the invalid character error on the next line
 
     if (type && filter) {
       exec(
@@ -81,6 +91,7 @@ function casperjsFunction(type, filter) {
 
 /** Manages call to casperFunc function, assigning appropriate arguments if any. Also, handles error.
  *
+ * @private
  * @param {string} type indicator of whether most "popular" or "latest" music is desired.
  * @param {string} filter the type of music you want leasted (eg. top || remixes || noremixes
  * @returns {Promise} Promise containing json from casperFunc or err if rejected.
@@ -97,6 +108,7 @@ function getData(type, filter, crawler = casperjsFunction) {
 
 /** Error Handling: Determines if valid parameters are passed to it. Returns error with clarifying message if not.
  *
+ * @private
  * @param {string} type indicator of whether most "popular" or "latest" music is desired.
  * @param {string} filter the type of music you want leasted (eg. top || remixes || noremixes
  * @returns {boolean} An Error on error. Or a true value if argument are correct
@@ -120,4 +132,5 @@ function validate(type, filter) {
   return typeIsValid ? true : false;
 }
 
-module.exports = hype5;
+/** Data resource for newly buzzing music using 'Hype Machine' as resource.  */
+module.exports = Hype5;
