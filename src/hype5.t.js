@@ -1,5 +1,7 @@
 const hype5 = require("./hype5.js");
 
+/* eslint-disable */
+
 describe("hype5", () => {
 
 	describe("'top' method", () => {
@@ -30,6 +32,7 @@ describe("hype5", () => {
             expect( hype5.top(null, mock).catch(e=>e) ).resolves.toEqual("We're cool!")
 
         });
+
 
 		test("Method calls crawlFunc function", async () => {
 			let crawlFuncSim = jest.fn((a) => a );
