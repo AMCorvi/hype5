@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for hlv.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="prettify.css" />
+    <link rel="stylesheet" href="base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="index.html">All files</a> hlv.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">58.97% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>23/39</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">51.85% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>14/27</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">70% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>7/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">62.16% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>23/37</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">require("babel-polyfill");
+const exec = require("child_process").exec;
+const path = require("path");
+&nbsp;
+/** @module Hype5*/
+&nbsp;
+const Hype5 = {
+  top: methodFactory("top"),
+  remixes: methodFactory("remixes"),
+  noremixes: methodFactory("noremixes")
+};
+&nbsp;
+/** Factory used to produced module method variations
+ * @name methodFactory
+ * @param {string} filter the category by which you would like to filter
+ * @return {function} a function set to the desired filter as a default
+ */
+function methodFactory(filter) {
+  return async function(
+    type = "popular",
+    sig = {
+      filter: filter,
+      retrieveTrackInfo: getData,
+      vData: validate
+    }
+  ) {
+    // Check if "type" parameter is valid value
+    // if not throw error
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (type) {
+      const isTypeValid = sig.vData(type, sig.filter);
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (!isTypeValid) <span class="cstat-no" title="statement not covered" >throw isTypeValid;</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      type = "popular";</span>
+    }
+&nbsp;
+    // Run casper script	&amp; retrieve JSON data.
+    const d = sig.retrieveTrackInfo(type, sig.filter);
+    let output;
+    await d.then(<span class="fstat-no" title="function not covered" >da</span>ta =&gt; (<span class="cstat-no" title="statement not covered" >output = data)</span>).catch(<span class="fstat-no" title="function not covered" >er</span>r =&gt; {
+<span class="cstat-no" title="statement not covered" >      throw err;</span>
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return output;</span>
+  };
+}
+&nbsp;
+/** This function exec an appropriatley formatted 'casperjs' command with
+ * the appropriate flags and data (as determined in the calling function) in
+ * a child process. It then return json a json array of music data
+ *
+ * @private
+ * @param {string} type indicator of whether most "popular" or "latest" music is desired.
+ * @param {string} filter the type of music you want leasted (eg. top || remixes || noremixes
+ * @returns {object} Array of objects contain blogged track info.
+ */
+function casperjsFunction(type, filter) {
+  return new Promise(function(resolve, reject) {
+    const data = <span class="fstat-no" title="function not covered" >fu</span>nction(err, stdout) {
+<span class="cstat-no" title="statement not covered" >      try {</span>
+<span class="cstat-no" title="statement not covered" >        resolve(stdout);</span>
+      } catch (err) {
+<span class="cstat-no" title="statement not covered" >        reject(err);</span>
+      }
+    };
+&nbsp;
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (type &amp;&amp; filter) {
+      exec(
+        "casperjs --verbose " +
+          path.join(__dirname, "./crawler.js") +
+          " --hypeType=" +
+          type +
+          " --hypeFilter=" +
+          filter,
+        data
+      );
+    } else <span class="cstat-no" title="statement not covered" >if (type) {</span>
+<span class="cstat-no" title="statement not covered" >      exec(</span>
+        " casperjs --verbose ./crawler.js " +
+          path.join(__dirname, "./crawler.js") +
+          " --hypeType=" +
+          type +
+          " --hypeFilter=" +
+          filter,
+        data
+      );
+    } else <span class="cstat-no" title="statement not covered" >if (!type) {</span>
+<span class="cstat-no" title="statement not covered" >      exec("casperjs --verbose " + path.join(__dirname, "./crawler.js"), data);</span>
+    }
+  });
+}
+&nbsp;
+/** Manages call to casperFunc function, assigning appropriate arguments if any. Also, handles error.
+ *
+ * @private
+ * @param {string} type indicator of whether most "popular" or "latest" music is desired.
+ * @param {string} filter the type of music you want leasted (eg. top || remixes || noremixes
+ * @returns {Promise} Promise containing json from casperFunc or err if rejected.
+ */
+function getData(type, filter, crawler = casperjsFunction) {
+  return new Promise((resolve, reject) =&gt; {
+    try {
+      type ? resolve(crawler(type, filter)) : <span class="branch-1 cbranch-no" title="branch not covered" >resolve(crawler());</span>
+    } catch (err) {
+<span class="cstat-no" title="statement not covered" >      reject(err);</span>
+    }
+  });
+}
+&nbsp;
+/** Error Handling: Determines if valid parameters are passed to it. Returns error with clarifying message if not.
+ *
+ * @private
+ * @param {string} type indicator of whether most "popular" or "latest" music is desired.
+ * @param {string} filter the type of music you want leasted (eg. top || remixes || noremixes
+ * @returns {boolean} An Error on error. Or a true value if argument are correct
+ */
+function validate(type, filter) {
+  //Verify that variable "type" is string return error otherwise
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof type !== "string") {
+<span class="cstat-no" title="statement not covered" >    return new Error(</span>
+      "First parameter (type) must my string e.g. 'popular'|| 'latest' "
+    );
+  }
+  //Verify that filter variable is a string or return error otherwise
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof filter !== "string") {
+<span class="cstat-no" title="statement not covered" >    return new Error(</span>
+      "Third parameter 'filter' must be of type string and equal one of the follow variable eg. 'top'||'noremixes'||'remixes'"
+    );
+  }
+  const typeIsValid = type === "popular" || <span class="branch-1 cbranch-no" title="branch not covered" >"latest";</span>
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (!typeIsValid)
+<span class="cstat-no" title="statement not covered" >    return new Error("'popular' or 'latest' are the only valid type");</span>
+  return typeIsValid ? true : <span class="branch-1 cbranch-no" title="branch not covered" >false;</span>
+}
+&nbsp;
+/** Data resource for newly buzzing music using 'Hype Machine' as resource.  */
+module.exports = Hype5;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Nov 16 2017 01:30:40 GMT-0500 (EST)
+</div>
+</div>
+<script src="prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="sorter.js"></script>
+</body>
+</html>
