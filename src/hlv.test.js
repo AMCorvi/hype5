@@ -1,6 +1,5 @@
 const Hype5 = require("./hlv.js");
 
-/* eslint-disable */
 
 describe("Hype5", function() {
   test("Module returns object", function() {
@@ -12,33 +11,39 @@ describe("Hype5", function() {
   });
 
   describe("top module", function() {
+
     test("Module contains expected method 'top' ", function() {
       expect(Hype5.top).toBeDefined();
     });
 
-		test("Method is a promise", function () {
-			expect(Hype5.top()).toBeInstanceOf(Promise);
-		})
+    test("Method is a promise", function() {
+      expect(Hype5.top()).toBeInstanceOf(Promise);
+    });
 
-		test("Module return object", function () {
+    test("Module return object", function() {
+      expect(typeof Hype5.top()).toBe("object");
+    });
 
-			expect(typeof Hype5.top()).toBe("object")
-		})
+    test("Method to throw when called w/ invalid filter args", function() {
+			expect(Hype5.top()).rejects.toBeInstanceOf(Error);
+			expect(Hype5.top("Invalid Value")).rejects.toBeInstanceOf(Error);
+    });
 
-		test.skip("Method to throw when call w/ invalid args", function () {
-			expect(Hype5.top(4)).toThrow()
-		})
+    test("Method to throw when called w/ invalid crawler args", function() {
+			expect(Hype5.top("top","Invalid String")).rejects.toBeInstanceOf(Error);
+    });
 
-		test("Calls crawler function", function () {
-			const mockCrawl = jest.fn();
-			const sig = {};
-			sig.vData = function () {return true};
-			sig.filter= "top"
-			sig.retrieveTrackInfo = ()=>{then:2}
-			const hype = Hype5.top("popular", sig);
-
-			expect(mockCrawl.mock.call).toEqual(1);
-
+		test("Method to throw when call w/ invalid validation args", function() {
+			let func = ()=>{};
+			expect(Hype5.top("top","Invalid String")).rejects.toBeInstanceOf(Error);
 		});
+
+    test("Calls crawler function", function() {
+			const crawler = jest.fn();
+      const hype = Hype5.top("popular",crawler);
+
+      expect(crawler).toBeCalled()
+    });
+
   });
 });

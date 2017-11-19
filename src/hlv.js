@@ -5,20 +5,20 @@ const path = require("path");
 /** @module Hype5*/
 
 /** Exported module object
-	* @namespace Hype5
-	*/
+ * @namespace Hype5
+ */
 const Hype5 = {};
 
 /** Method retrieves track info for overall "top" rated songs
-	* @function
-	* @param {string} type The category name of track info desired ( popular || instance )
-	* @param {object} sig signature object used for test via dependenct injections
-	* @property {string} sig.filter filter type desired. Implemented by default to match method name.
-	* @property {string} sig.retrieveTrackInfo function which return Promise containing trackInfo.
-	* @property {string} sig.vData function used to validate argument type and values
-	* @return {object} object containing track info of specified type and filter
-	*
-	* */
+ * @function
+ * @param {string} type The category name of track info desired ( popular || instance )
+ * @param {object} sig signature object used for test via dependenct injections
+ * @property {string} sig.filter filter type desired. Implemented by default to match method name.
+ * @property {string} sig.retrieveTrackInfo function which return Promise containing trackInfo.
+ * @property {string} sig.vData function used to validate argument type and values
+ * @return {object} object containing track info of specified type and filter
+ *
+ * */
 Hype5.top = methodFactory("top");
 
 /** Method retrieves track info for "remixed" songs
@@ -29,7 +29,7 @@ Hype5.top = methodFactory("top");
  * @property {string} sig.retrieveTrackInfo function which return Promise containing trackInfo.
  * @property {string} sig.vData function used to validate argument type and values
  *
-	* @return {object} object containing track info of specified type and filter
+ * @return {object} object containing track info of specified type and filter
  * */
 Hype5.remixes = methodFactory("remixes");
 
@@ -41,7 +41,7 @@ Hype5.remixes = methodFactory("remixes");
  * @property {string} sig.retrieveTrackInfo function which return Promise containing trackInfo.
  * @property {string} sig.vData function used to validate argument type and values
  *
-	* @return {object} object containing track info as specified above
+ * @return {object} object containing track info as specified above
  * */
 Hype5.noremixes = methodFactory("noremixes");
 
@@ -51,26 +51,25 @@ Hype5.noremixes = methodFactory("noremixes");
  * @param {string} filter the category by which you would like to filter
  * @return {function} a function set to the desired filter as a default
  */
-function methodFactory(filter) {
+function methodFactory(fil) {
   return async function(
     type = "popular",
-    sig = {
-      filter: filter,
-      retrieveTrackInfo: getData,
-      vData: validate
-    }
+    crawler = casperjsFunction,
+    filter = fil,
+    retrieveTrackInfo = getData,
+    vData = validate
   ) {
     // Check if "type" parameter is valid value
     // if not throw error
     if (type) {
-      const isTypeValid = sig.vData(type, sig.filter);
+      const isTypeValid = vData(type, filter);
       if (!isTypeValid || isTypeValid instanceof Error) throw isTypeValid;
     } else {
       type = "popular";
     }
 
     // Run casper script	& retrieve JSON data.
-    const d = sig.retrieveTrackInfo(type, sig.filter);
+    const d = retrieveTrackInfo(type, filter, crawler);
     let output;
     await d.then(data => (output = data)).catch(err => {
       throw err;
