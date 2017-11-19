@@ -2,7 +2,7 @@
   "name": "hype5",
   "version": "0.0.3",
   "description": "Data resource for newly buzzing music using 'Hype Machine' as resource... ",
-  "main": "./lib/hype5.v2.js",
+  "main": "./lib/src/hype5.v2.js",
   "scripts": {
     "build-it": "babel src/hype5.v2.js src/crawler.js -d lib",
     "commit": "git-cz",
