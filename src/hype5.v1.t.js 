@@ -1,4 +1,4 @@
-const hype5 = require("./hype5.js");
+const hype5 = require("./hype5.v1.js");
 
 /* eslint-disable */
 

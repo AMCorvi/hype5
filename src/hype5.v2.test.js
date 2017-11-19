@@ -1,4 +1,4 @@
-const Hype5 = require("./hlv.js");
+const Hype5 = require("./hype5.v2.js");
 
 
 describe("Hype5", function() {

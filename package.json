@@ -2,8 +2,9 @@
   "name": "hype5",
   "version": "0.0.0-development",
   "description": "Data resource for newly buzzing music using 'Hype Machine' as resource... ",
-  "main": "./dist/hype5.js",
+  "main": "./lib/hype5.v2.js",
   "scripts": {
+    "build": "babel src/hype5.v2.js src/crawler.js -d lib",
     "commit": "git-cz",
     "prestart": "eslint -- --fix",
     "start": "run-p lint:watch test:watch generatedocs:watch",
