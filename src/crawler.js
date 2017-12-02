@@ -1,6 +1,7 @@
 var casper = require("casper").create();
 var utils = require("utils");
 
+casper.options.waitTimeout = 5000
 var tracks = [];
 
 /**
@@ -93,9 +94,7 @@ function scanHype(type, filter) {
 }
 
 if (opt.filter) {
-  utils.dump("type and filter");
   scanHype(opt.type, opt.filter);
 } else {
-  utils.dump(" type only");
   scanHype(opt.type);
 }

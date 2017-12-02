@@ -1,5 +1,6 @@
 const Hype5 = require("./hype5.v2.js");
 
+/* eslint-disable */
 
 describe("Hype5", function() {
   test("Module returns object", function() {

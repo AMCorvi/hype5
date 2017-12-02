@@ -92,6 +92,8 @@ function casperjsFunction(type, filter) {
   return new Promise(function(resolve, reject) {
     const data = function(err, stdout) {
       try {
+				// Convert string of JSON to the real deal...
+				stdout = JSON.Parse(stdout)
         resolve(stdout);
       } catch (err) {
         reject(err);
