@@ -93,7 +93,7 @@ function casperjsFunction(type, filter) {
     const data = function(err, stdout) {
       try {
 				// Convert string of JSON to the real deal...
-				stdout = JSON.Parse(stdout)
+				stdout = JSON.parse(stdout)
         resolve(stdout);
       } catch (err) {
         reject(err);
