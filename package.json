@@ -1,6 +1,6 @@
 {
   "name": "hype5",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Data resource for newly buzzing music using 'Hype Machine' as resource... ",
   "main": "./lib/src/hype5.v2.js",
   "scripts": {
