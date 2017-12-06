@@ -31,7 +31,7 @@ Hype5.top = methodFactory("top");
  *
  * @return {object} object containing track info of specified type and filter
  * */
-Hype5.remixes = methodFactory("remixes");
+Hype5.remixes = methodFactory("remix");
 
 /** Method retrieves track info for song that are not "remixes"
  * @function
@@ -43,7 +43,7 @@ Hype5.remixes = methodFactory("remixes");
  *
  * @return {object} object containing track info as specified above
  * */
-Hype5.noremixes = methodFactory("noremixes");
+Hype5.noremixes = methodFactory("noremix");
 
 /** Factory used to produced module method variations
  * @method
@@ -67,6 +67,11 @@ function methodFactory(fil) {
     } else {
       type = "popular";
     }
+
+    // Set filter to null when to so:
+    // when calling the top method ensure to correct url is called
+    // by choosing the appropriate options in exec call
+    filter === "top" && (filter = null);
 
     // Run casper script	& retrieve JSON data.
     const d = retrieveTrackInfo(type, filter, crawler);
@@ -92,8 +97,8 @@ function casperjsFunction(type, filter) {
   return new Promise(function(resolve, reject) {
     const data = function(err, stdout) {
       try {
-				// Convert string of JSON to the real deal...
-				stdout = JSON.parse(stdout)
+        // Convert string of JSON to the real deal...
+        stdout = JSON.parse(stdout);
         resolve(stdout);
       } catch (err) {
         reject(err);
@@ -108,17 +113,15 @@ function casperjsFunction(type, filter) {
           type +
           " --hypeFilter=" +
           filter,
-        data
+        data // Callback
       );
     } else if (type) {
       exec(
-        " casperjs --verbose ./crawler.js " +
+        "casperjs --verbose " +
           path.join(__dirname, "./crawler.js") +
           " --hypeType=" +
-          type +
-          " --hypeFilter=" +
-          filter,
-        data
+          type,
+        data // Callback
       );
     } else if (!type) {
       exec("casperjs --verbose " + path.join(__dirname, "./crawler.js"), data);
@@ -157,17 +160,20 @@ function validate(type, filter) {
       "First parameter (type) must my string e.g. 'popular'|| 'latest' "
     );
   }
+
   //Verify that filter variable is a string or return error otherwise
   if (typeof filter !== "string") {
     return new Error(
       "Third parameter 'filter' must be of type string and equal one of the follow variable eg. 'top'||'noremixes'||'remixes'"
     );
   }
-  const typeIsValid = type === ("popular" || "latest");
-  if (!typeIsValid) {
-    return new Error("'popular' or 'latest' are the only valid type");
-  } else {
+
+  if (type === "popular" || type === "latest") {
     return true;
+  } else {
+    return new Error(
+      "'popular' or 'latest' are the only valid values for type"
+    );
   }
 }
 
