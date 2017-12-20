@@ -2,7 +2,13 @@ require("babel-polyfill");
 const exec = require("child_process").exec;
 const path = require("path");
 
-/** @module Hype5*/
+/** */
+/**
+ * @module Hype5
+ * @overview Data resource module enabling the user have automated access to the very latest and most popular music in the internet * globally
+ * @author AMCorvi
+ * @license MIT
+ */
 
 /** Exported module object
  * @namespace Hype5
@@ -12,7 +18,7 @@ const Hype5 = {};
 /** Method retrieves track info for overall "top" rated songs
  * @function
  * @param {string} type The category name of track info desired ( popular || instance )
- * @param {object} sig signature object used for test via dependenct injections
+ * @param {object} sig signature object used for test via dependency injections
  * @property {string} sig.filter filter type desired. Implemented by default to match method name.
  * @property {string} sig.retrieveTrackInfo function which return Promise containing trackInfo.
  * @property {string} sig.vData function used to validate argument type and values
@@ -24,7 +30,7 @@ Hype5.top = methodFactory("top");
 /** Method retrieves track info for "remixed" songs
  * @function
  * @param {string} type The category name of track info desired ( popular || instance )
- * @param {object} sig signature object used for test via dependenct injections
+ * @param {object} sig signature object used for test via dependency injections
  * @property {string} sig.filter filter type desired. Implemented by default to match method name.
  * @property {string} sig.retrieveTrackInfo function which return Promise containing trackInfo.
  * @property {string} sig.vData function used to validate argument type and values
@@ -36,7 +42,7 @@ Hype5.remixes = methodFactory("remix");
 /** Method retrieves track info for song that are not "remixes"
  * @function
  * @param {string} type The category name of track info desired ( popular || instance )
- * @param {object} sig signature object used for test via dependenct injections
+ * @param {object} sig signature object used for test via dependency injections
  * @property {string} sig.filter filter type desired. Implemented by default to match method name.
  * @property {string} sig.retrieveTrackInfo function which return Promise containing trackInfo.
  * @property {string} sig.vData function used to validate argument type and values
@@ -88,7 +94,7 @@ function methodFactory(fil) {
  * the appropriate flags and data (as determined in the calling function) in
  * a child process. It then return json a json array of music data
  *
- * @protected
+ * @private
  * @param {string} type indicator of whether most "popular" or "latest" music is desired.
  * @param {string} filter the type of music you want listed (eg. top || remixes || noremixes
  * @returns {object} Array of objects contain blogged track info.
@@ -131,7 +137,7 @@ function casperjsFunction(type, filter) {
 
 /** Manages call to casperFunc function, assigning appropriate arguments if any. Also, handles error.
  *
- * @protected
+ * @private
  * @param {string} type indicator of whether most "popular" or "latest" music is desired.
  * @param {string} filter the type of music you want leasted (eg. top || remixes || noremixes
  * @returns {Promise} Promise containing json from casperFunc or err if rejected.
@@ -148,7 +154,7 @@ function getData(type, filter, crawler = casperjsFunction) {
 
 /** Error Handling: Determines if valid parameters are passed to it. Returns error with clarifying message if not.
  *
- * @protected
+ * @private
  * @param {string} type indicator of whether most "popular" or "latest" music is desired.
  * @param {string} filter the type of music you want leasted (eg. top || remixes || noremixes
  * @returns {boolean} An Error on error. Or a true value if argument are correct
